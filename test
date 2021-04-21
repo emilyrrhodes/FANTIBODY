@@ -1,0 +1,35 @@
+1. Download all the files I need from rscb.org.  
+
+2. Find the residue to mutate. 
+Helpand: press esc
+Helpand: /[chain name]  [resid num]
+Helpand: press n (to search forward)
+Helpand: press N (to search backward)
+
+3. Select a block of text for the residue name. 
+Command: press esc
+Command: press v
+Command: arrow over the block of text
+Command: press d
+
+2. Open files in VMD.
+Command: mol new (pdb file name).pdb 
+
+3. Save aligned molecule.
+a. Select the molecule. 
+Command: set sel [atomselect 0 "chain A"]
+b. Make a pdb from the molecule. 
+Command: set sel2 [::TopoTools::selections2mol "$sel"]
+
+4. Look at it.  
+
+5. Save pdb. 
+Command: animate write pdb (name of pdb).pdb $sel2
+
+6. Move pdb file to where you want it stored.  
+
+
+
+ 
+
+

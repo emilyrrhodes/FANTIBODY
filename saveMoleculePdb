@@ -1,0 +1,23 @@
+1. Download all the files I need from rscb.org.  
+
+2. Open files in VMD.
+Command: mol new (pdb file name).pdb 
+
+3. Save aligned molecule.
+a. Select the molecule. 
+Command: set sel [atomselect 0 "chain A"]
+b. Make a pdb from the molecule. 
+Command: set sel2 [::TopoTools::selections2mol "$sel"]
+
+4. Look at it.  
+
+5. Save pdb. 
+Command: animate write pdb (name of pdb).pdb $sel2
+
+6. Move pdb file to where you want it stored.  
+
+
+
+ 
+
+

@@ -1,0 +1,25 @@
+1. Download all the files I need from rscb.org.  
+
+2. Find the residue to mutate. 
+Command: press esc
+Command: /[chain name]  [resid num]
+Command: press n (to search forward)
+Command: press N (to search backward)
+
+3. Select a block of text for the residue name. 
+Command: press esc
+Command: press control v
+Command: arrow over the block of text
+Command: press c
+Command: type what you now want in that place
+Command: press esc
+
+4. Edit the atom names based on the same amino acid. 
+Tip: Add more lines if you have to. 
+
+5. Change the angle and location of the atoms so nothing has exactly the same place. 
+
+6. Renumber the residues. 
+Command: gmx_mpi editconf -f [old_name].pdb -resnr [resid_num] -o [new_name].pdb
+
+
