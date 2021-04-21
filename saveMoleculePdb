@@ -1,7 +1,7 @@
 1. Download all the files I need from rscb.org.  
 
 2. Open files in VMD.
-Command: mol new (pdb file name).pdb 
+Command: vmd (pdb file name).pdb 
 
 3. Save aligned molecule.
 a. Select the molecule. 
