@@ -1,0 +1,59 @@
+1. Download all the files I need from rscb.org.  
+7BWJ - RBD with antibody aligned. 
+6VXX or 6XM5 - 0 RBD in up conformation. 
+6VYB - 1 RBD in up conformation. 
+6X2B - 2 RBD in up conformation. 
+7CAK - 3 RBD in up conformation. 
+
+2. Change the RBD molecules to be named the same thing.
+Command: :%s/ E / A /
+Note: Include spaces to ensure that not all of the Es are replaced with As. Change the chain name in only the one you are trying to move.
+a. Determine the range when the line up starts. (with bottom molecule)
+Top - 6vxx Bottom - 7bwj: 334 
+Top - 6xm5 Bottom - 7bwj: 334 
+Top - 6vyb Bottom - 7bwj: 334
+Top - 6x2b Bottom - 7bwj: 334 
+Top - 7cak Bottom - 7bwj: 334
+b. Determine the end value. (Last residue that you want to align) 
+Bottom - 7bwj: 526 
+
+3. Open files in VMD.
+Command: mol new (pdb file name).pdb 
+Note: Load the molecule you want to align to (top) first and the molecule you want to move (bottom) second. 
+
+4. Open Extension - Analysis - RMSD Trajectory Tool
+
+5. Type in the text box what you want to align. 
+Note: Sometimes the structures are missing atoms. You can first start by trying to allign all the "protein" molecules. Then get smaller and smaller until it works and build up from there. 
+Command: protein
+Command: chain A 
+Command: chain A and name CA and resid ### to ### (the first number is the residue number for which molecule starts and the second number is changed to figure out how they are aligned)
+Command: chain A and name CA and resid ### to ### ### to ###
+Top - 6vxx Bottom - 7bwj: chain A and name CA and resid 333 to 444 447 to 454 462 to 468 489 to 501 503 to 526
+Top - 6xm5 Bottom - 7bwj: chain A and name CA and resid 333 to 444 447 to 526 
+Top - 6vyb Bottom - 7bwj: chain A and name CA and resid 333 to 442 448 to 470 490 to 501 503 to 526
+Top - 6x2b Bottom - 7bwj: chain A and name CA and resid 333 to 442 448 to 470 490 to 501 503 to 526
+Top - 7cak Bottom - 7bwj: chain A and name CA and resid 333 to 444 447 to 526 
+antibody: chain A and name CA and resid 333 to 445 448 to 526
+
+6. Save aligned molecule.
+a. Select the top molecule. 
+Command: set sel [atomselect 0 "chain A"]
+b. Select the bottom aligned molecule. 
+Command: set sel2 [atomselect 1 "chain H L"]
+c. Combine the two molecules. 
+Command: set sel3 [::TopoTools::selections2mol "$sel $sel2"]
+
+7. Look at it.  
+Command: Press D on each of the molecules in the VMD window. Keep the last molecule. 
+
+8. Save pdb. 
+Command: animate write pdb (name of pdb).pdb $sel3
+
+9. Move pdb file to where you want it stored.  
+
+
+
+ 
+
+

@@ -1,0 +1,91 @@
+1. Download all of the fasta files for the structure I want to model.
+
+2. Delete the heading, except for the name of the structure.
+
+3. Separate chains into separate files. 
+
+3. Go to https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE=Proteins to search for similar structures.
+a. Copy and paste your fasta sequence into the text box. 
+b. Select pdb databank for the databank option. 
+c. Click show results in a new window. 
+d. Click blast.
+
+4. Identify structures with similar sequences. 
+
+5. Download aligned sequences. 
+
+6. Download the pdb structures. 
+
+7. Remove all the chains that are not needed for alignment from the pdb files. 
+
+8. Paste all the files in one file. 
+a. Name the file: [Name].txt
+
+9. Do sequence alignment. 
+a. Go to: https://embnet.vital-it.ch/software/ClustalW.html
+b. Use PIR output format option. 
+c. Only compare sequence with target: select one target and one template. 
+d. Download the PIR output file. 
+e. Repeat with the other sequences. 
+
+10. Combined the aligned sequence files by pasting the alignment with the other target and alignment. 
+
+11. Rename the sequence as: 
+sequence:[name of sequence]:[first amino acid number]:[chain name]:[last amino acid number]:[organism name]:[protein name]:[source of protein]:[resolution factor]:[r factor]
+	Ex:sequence:target:1::439:human:Pertuzumab:::
+
+12. Rename the aligned sequences: 
+structure[how structure was solved]:[name of file]:[first amino acid number]:[chain name]:[last amino acid number]:[organism name]:[protein name]:[source of protein]:[resolution factor]:[r factor]
+	Ex:structureX:1s78.pdb:1:D:216:human:Pertuzumab:10.1016/S1535-6108(04)00083-2:3.25 ANGSTROMS:0.227 
+
+13. Make sure that the missing residues in the pdb structure are represented in the alignment file. 
+a. Open the pdb file. 
+b. Search for missing residues. 
+c. Search for the missing residues in the alignment file. 
+d. Delete missing residues and replace them with dashes in the alignment file. 
+
+14. Copy loop.py and model-loop-define.py to your working directory. 
+a. Go to /Library/modeller-10.1/examples/automodel
+b. Copy loop.py and model-loop-define.py to your working directory. 
+
+
+15. Edit model-loop-define.py. 
+a. Change the alnfile variable to be the name of your alignment file. 
+b. Change the name of knowns to the name of your known structures you want 
+c. Change the name of sequence to the name of your taraget structure you want to obtain. 
+d. Change the loop residues numbers. 
+ex: return Selection(self.residue_range('215:A', '216:A'))
+ex: return Selection(self.residue_range('215:', '216:'))
+ex: return Selection(self.residue_range('215:A', '216:A'),
+                     self.residue_range('220:A', '230:A'))
+e. Change the number of iterations is done. 
+ex: a.ending_model  = 10  & a.loop.ending_model   = 20
+
+16. Run modeller. 
+Command: mod10.1 model-loop-define.py
+
+17. Look at the log output file. 
+
+18. Copy the end of the file with the scores and find the one with the smallest score. 
+
+19. Take the pdb file with the smallest score and view it in pymol or vmd. 
+
+20. Identify unfolded regions of the protein. 
+
+21. Edit loop.py
+a. Change the inimodel variable to be the output from the modeller run. 
+b. Change the numbers of residues to properly fold. 
+c. Change the number of loops. 
+
+22. Run the loop folding. 
+Command: mod10.1 loop.py
+
+23. Check the structure on https://saves.mbi.ucla.edu/. 
+a. Go to: https://saves.mbi.ucla.edu/
+b. Upload the pdb file. 
+c. Run procheck.
+
+24. Make sure the structure looks good by looking at the Ramachandran Plot.  
+
+
+
